@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
-});
+Route::get('/', 'HomeController@index');
+
+Route::get('/login', 'LoginController@index');
+Route::match(array('GET', 'POST'),'/login/auth', 'LoginController@auth');
