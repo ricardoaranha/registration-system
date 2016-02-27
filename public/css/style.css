@@ -1,6 +1,7 @@
 body {
    background-color: rgb(240,240,240) !important;
    padding-top: 70px;
+   padding-bottom: 70px;
 }
 
 hr {

@@ -14,4 +14,6 @@
 Route::get('/', 'HomeController@index');
 
 Route::get('/login', 'LoginController@index');
-Route::match(array('GET', 'POST'),'/login/auth', 'LoginController@auth');
+Route::post('/login/auth', 'LoginController@auth');
+Route::get('/login/cadastrar', 'LoginController@newUser');
+Route::post('/login/cadastrar', 'LoginController@create');
