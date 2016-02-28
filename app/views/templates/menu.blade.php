@@ -7,8 +7,10 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="active"><a href="{{ URL::to('/') }}">Início</a></li>
+        @if(Session::has('user'))
         <li><a href="{{ URL::to('/seletivos') }}">Seletivos</a></li>
         <li><a href="{{ URL::to('/cargos') }}">Cargos</a></li>
+        @endif
       </ul>
       <ul class="nav navbar-nav navbar-right">
          @if(Session::has('user'))

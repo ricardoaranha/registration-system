@@ -19,16 +19,18 @@ Route::get('/login/cadastrar', 'LoginController@newUser');
 Route::post('/login/cadastrar', 'LoginController@create');
 Route::get('/logout', 'LoginController@logout');
 
-Route::get('/seletivos', 'SeletivosController@retrieve');
-Route::get('/seletivos/cadastrar', 'SeletivosController@novoSeletivo');
-Route::post('/seletivos/cadastrar', 'SeletivosController@create');
-Route::get('/seletivos/update/{seletivoid}', 'SeletivosController@edit');
-Route::post('/seletivos/update/{seletivoid}', 'SeletivosController@update');
-Route::get('/seletivos/delete/{seletivoid}', 'SeletivosController@delete');
+if (Session::has('user')) {
+   Route::get('/seletivos', 'SeletivosController@retrieve');
+   Route::get('/seletivos/cadastrar', 'SeletivosController@novoSeletivo');
+   Route::post('/seletivos/cadastrar', 'SeletivosController@create');
+   Route::get('/seletivos/update/{seletivoid}', 'SeletivosController@edit');
+   Route::post('/seletivos/update/{seletivoid}', 'SeletivosController@update');
+   Route::get('/seletivos/delete/{seletivoid}', 'SeletivosController@delete');
 
-Route::get('/cargos', 'CargosController@retrieve');
-Route::get('/cargos/cadastrar', 'CargosController@novoCargo');
-Route::post('/cargos/cadastrar', 'CargosController@create');
-Route::get('/cargos/update/{cargoid}', 'CargosController@edit');
-Route::post('/cargos/update/{cargoid}', 'CargosController@update');
-Route::get('/cargos/delete/{cargoid}', 'CargosController@delete');
+   Route::get('/cargos', 'CargosController@retrieve');
+   Route::get('/cargos/cadastrar', 'CargosController@novoCargo');
+   Route::post('/cargos/cadastrar', 'CargosController@create');
+   Route::get('/cargos/update/{cargoid}', 'CargosController@edit');
+   Route::post('/cargos/update/{cargoid}', 'CargosController@update');
+   Route::get('/cargos/delete/{cargoid}', 'CargosController@delete');
+}
