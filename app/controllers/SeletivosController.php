@@ -6,9 +6,10 @@ class SeletivosController extends BaseController {
 
 		$title = 'Seletivos';
 
-      $seletivos = Seletivos::all();
+      $seletivos = Seletivos::paginate(10);
 
-		return View::make('seletivos.index', compact('title', 'seletivos'));
+		return View::make('seletivos.index', compact('title', 'seletivos'))
+			->with('seletivos', $seletivos);
 
 	}
 

@@ -8,7 +8,7 @@
 </div>
 @endif
 
-<a href="{{ URL::to('/seletivos/cadastrar') }}" class="btn btn-primary btn-md">Novo seletivo</a>
+<a href="{{ URL::to('/cargos/cadastrar') }}" class="btn btn-primary btn-md">Novo cargo</a>
 
 <br /><br />
 
@@ -16,13 +16,22 @@
    <thead>
       <tr>
          <th>
+            Cargo
+         </th>
+         <th>
             Seletivo
          </th>
          <th>
-            Período
+            Nivel de escolaridade
          </th>
-         <th width="500">
-            Descrição
+         <th>
+            Salário
+         </th>
+         <th>
+            Carga horaria
+         </th>
+         <th>
+            Vagas
          </th>
          <th colspan="2">
             Ações
@@ -31,22 +40,31 @@
    </thead>
 
    <tbody>
-      @foreach($seletivos as $row)
+      @foreach($cargos as $row)
       <tr>
+         <td>
+            {{ mb_strtoupper($row->cargo) }}
+         </td>
          <td>
             {{ mb_strtoupper($row->seletivo) }}
          </td>
          <td>
-            {{ date('d/m/Y', strtotime($row->dtainicio)) }} - {{ date('d/m/Y', strtotime($row->dtafim)) }}
+            {{ mb_strtoupper($row->escolaridade) }}
          </td>
          <td>
-            {{ mb_strtoupper($row->descricao) }}
+            {{ 'R$ '.$row->salario }}
          </td>
          <td>
-            <a href="{{ URL::to('/seletivos/update/'.$row->id) }}" class="btn btn-success btn-md">Editar</a>
+            {{ $row->cargahoraria }}
          </td>
          <td>
-            <a href="{{ URL::to('/seletivos/delete/'.$row->id) }}" class="btn btn-danger btn-md">Excluir</a>
+            {{ $row->vagas }}
+         </td>
+         <td>
+            <a href="{{ URL::to('/cargos/update/'.$row->id) }}" class="btn btn-success btn-md">Editar</a>
+         </td>
+         <td>
+            <a href="{{ URL::to('/cargos/delete/'.$row->id) }}" class="btn btn-danger btn-md">Excluir</a>
          </td>
       </tr>
       @endforeach
@@ -54,7 +72,7 @@
 </table>
 
 <div class="col-md-8 col-md-offset-2">
-   <?php echo $seletivos->links(); ?>
+   <?php echo $cargos->links(); ?>
 </div>
 
 @stop
