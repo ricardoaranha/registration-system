@@ -10,7 +10,7 @@ class CargosController extends BaseController {
          ->leftjoin('seletivos', 'seletivos.id', '=', 'cargos.seletivoid')
          ->leftJoin('escolaridade', 'escolaridade.id', '=', 'cargos.escolaridadeid')
          ->orderBy('cargo', 'asc')
-         ->paginate(1);
+         ->paginate(10);
 
 		return View::make('cargos.index', compact('title', 'cargos'))
          ->with('cargos', $cargos);
