@@ -9,7 +9,6 @@
          <strong>{{ Session::get('msg') }}</strong>
       </div>
       @endif
-      <hr>
       <div class="col-md-8 col-md-offset-2">
          <form action="{{ URL::to('/login') }}" method="post">
             <fieldset>

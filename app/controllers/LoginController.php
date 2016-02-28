@@ -21,8 +21,9 @@ class LoginController extends BaseController {
       if ($user) {
 
          $user = array(
-            'id' => $user->userid,
-            'nome' => $user->nome
+            'id' => $user->id,
+            'nome' => $user->nome,
+				'usertypeid' => $user->usertypeid
          );
 
          Session::put('user', $user);
