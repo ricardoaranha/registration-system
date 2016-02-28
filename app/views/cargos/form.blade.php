@@ -57,7 +57,7 @@
             <input type="number" class="form-control" name="vagas" id="vagas" @if(isset($cargo)) value="{{ $cargo->vagas }}" @endif required>
          </div>
 
-         <input type="submit" class="btn btn-success btn-md btn-block" value="Cadastrar">
+         <input type="submit" class="btn btn-success btn-md btn-block" value="{{ $buttonValue }}">
       </form>
 
    </div>

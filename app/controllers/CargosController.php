@@ -10,7 +10,7 @@ class CargosController extends BaseController {
          ->leftjoin('seletivos', 'seletivos.id', '=', 'cargos.seletivoid')
          ->leftJoin('escolaridade', 'escolaridade.id', '=', 'cargos.escolaridadeid')
          ->orderBy('cargo', 'asc')
-         ->paginate(10);
+         ->paginate(20);
 
 		return View::make('cargos.index', compact('title', 'cargos'))
          ->with('cargos', $cargos);
@@ -29,7 +29,9 @@ class CargosController extends BaseController {
       ->orderBy('escolaridade', 'asc')
       ->get();
 
-      return View::make('cargos.form', compact('title', 'actionUrl', 'seletivos', 'escolaridade'));
+		$buttonValue = 'Cadastrar';
+
+      return View::make('cargos.form', compact('title', 'actionUrl', 'seletivos', 'escolaridade', 'buttonValue'));
 
    }
 
@@ -50,7 +52,7 @@ class CargosController extends BaseController {
 
 		$cargo = Cargos::find($cargoid);
 
-		$actionUrl = URL::to('/cargos/update/'.$cargo->id);
+		$actionUrl = URL::to('/cargos/update/'.$cargoid);
 
       $seletivos = Seletivos::select('id', 'seletivo')->get();
 
@@ -58,7 +60,9 @@ class CargosController extends BaseController {
       ->orderBy('escolaridade', 'asc')
       ->get();
 
-      return View::make('cargos.form', compact('title', 'cargo', 'actionUrl', 'seletivos', 'escolaridade'));
+		$buttonValue = 'Salvar';
+
+      return View::make('cargos.form', compact('title', 'cargo', 'actionUrl', 'seletivos', 'escolaridade', 'buttonValue'));
 
 	}
 

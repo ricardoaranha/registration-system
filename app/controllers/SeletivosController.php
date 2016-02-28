@@ -6,7 +6,7 @@ class SeletivosController extends BaseController {
 
 		$title = 'Seletivos';
 
-      $seletivos = Seletivos::paginate(10);
+      $seletivos = Seletivos::paginate(20);
 
 		return View::make('seletivos.index', compact('title', 'seletivos'))
 			->with('seletivos', $seletivos);
@@ -19,7 +19,9 @@ class SeletivosController extends BaseController {
 
 		$actionUrl = URL::to('/seletivos/cadastrar');
 
-      return View::make('seletivos.form', compact('title', 'actionUrl'));
+		$buttonValue = 'Cadastrar';
+
+      return View::make('seletivos.form', compact('title', 'actionUrl', 'buttonValue'));
 
    }
 
@@ -40,9 +42,11 @@ class SeletivosController extends BaseController {
 
 		$seletivo = Seletivos::find($seletivoid);
 
-		$actionUrl = URL::to('/seletivos/update/'.$seletivo->id);
+		$actionUrl = URL::to('/seletivos/update/'.$seletivoid);
 
-      return View::make('seletivos.form', compact('title', 'seletivo', 'actionUrl'));
+		$buttonValue = 'Salvar';
+
+      return View::make('seletivos.form', compact('title', 'seletivo', 'actionUrl', 'buttonValue'));
 
 	}
 

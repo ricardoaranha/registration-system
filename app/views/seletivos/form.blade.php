@@ -32,8 +32,8 @@
             </label>
             <textarea type="text" class="form-control" name="descricao" id="descricao" required>@if(isset($seletivo)) {{ $seletivo->descricao }} @endif</textarea>
          </div>
-         
-         <input type="submit" class="btn btn-success btn-md btn-block" value="Cadastrar">
+
+         <input type="submit" class="btn btn-success btn-md btn-block" value="{{ $buttonValue }}">
       </form>
 
    </div>

@@ -20,6 +20,7 @@ Route::post('/login/cadastrar', 'LoginController@create');
 Route::get('/logout', 'LoginController@logout');
 
 if (Session::has('user')) {
+
    Route::get('/seletivos', 'SeletivosController@retrieve');
    Route::get('/seletivos/cadastrar', 'SeletivosController@novoSeletivo');
    Route::post('/seletivos/cadastrar', 'SeletivosController@create');
@@ -33,4 +34,10 @@ if (Session::has('user')) {
    Route::get('/cargos/update/{cargoid}', 'CargosController@edit');
    Route::post('/cargos/update/{cargoid}', 'CargosController@update');
    Route::get('/cargos/delete/{cargoid}', 'CargosController@delete');
+
+   Route::get('/inscritos', 'InscritosController@retrieve');
+   Route::get('/inscritos/update/{inscritoid}', 'InscritosController@edit');
+   Route::post('/inscritos/update/{inscritoid}', 'InscritosController@update');
+   Route::get('/inscritos/delete/{inscritoid}', 'InscritosController@delete');
+
 }

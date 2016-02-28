@@ -10,6 +10,7 @@
         @if(Session::has('user'))
         <li><a href="{{ URL::to('/seletivos') }}">Seletivos</a></li>
         <li><a href="{{ URL::to('/cargos') }}">Cargos</a></li>
+        <li><a href="{{ URL::to('/inscritos') }}">Inscritos</a></li>
         @endif
       </ul>
       <ul class="nav navbar-nav navbar-right">
