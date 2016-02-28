@@ -18,7 +18,7 @@ class User extends Eloquent {
 
 	protected function auth($email, $senha) {
 
-		return DB::table('users')
+		return DB::table($this->table)
 			->where('email', $email)
 			->where('senha', $senha)
 			->first();
