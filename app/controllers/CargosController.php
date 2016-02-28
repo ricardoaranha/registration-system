@@ -17,6 +17,23 @@ class CargosController extends BaseController {
 
 	}
 
+	public function search() {
+
+		$title = 'Cargos';
+
+      $cargos = Cargos::select('cargo', 'cargos.id', 'salario', 'cargahoraria', 'vagas', 'seletivo', 'escolaridade')
+         ->leftjoin('seletivos', 'seletivos.id', '=', 'cargos.seletivoid')
+         ->leftJoin('escolaridade', 'escolaridade.id', '=', 'cargos.escolaridadeid')
+			->where('cargo', 'LIKE', '%'.Input::get('query').'%')
+			->paginate();
+
+		$button = '<a href="'.URL::to('/cargos').'" class="btn btn-warning btn-md">Voltar</a>';
+
+		return View::make('cargos.index', compact('title', 'cargos', 'button'))
+			->with('cargos', $cargos);
+
+	}
+
    public function novoCargo() {
 
       $title = 'Cadastro de cargos';

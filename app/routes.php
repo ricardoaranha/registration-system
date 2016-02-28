@@ -22,6 +22,7 @@ Route::get('/logout', 'LoginController@logout');
 if (Session::has('user')) {
 
    Route::get('/seletivos', 'SeletivosController@retrieve');
+   Route::post('/seletivos', 'SeletivosController@search');
    Route::get('/seletivos/cadastrar', 'SeletivosController@novoSeletivo');
    Route::post('/seletivos/cadastrar', 'SeletivosController@create');
    Route::get('/seletivos/update/{seletivoid}', 'SeletivosController@edit');
@@ -29,6 +30,7 @@ if (Session::has('user')) {
    Route::get('/seletivos/delete/{seletivoid}', 'SeletivosController@delete');
 
    Route::get('/cargos', 'CargosController@retrieve');
+   Route::post('/cargos', 'CargosController@search');
    Route::get('/cargos/cadastrar', 'CargosController@novoCargo');
    Route::post('/cargos/cadastrar', 'CargosController@create');
    Route::get('/cargos/update/{cargoid}', 'CargosController@edit');
@@ -36,6 +38,7 @@ if (Session::has('user')) {
    Route::get('/cargos/delete/{cargoid}', 'CargosController@delete');
 
    Route::get('/inscritos', 'InscritosController@retrieve');
+   Route::post('/inscritos', 'InscritosController@search');
    Route::get('/inscritos/update/{inscritoid}', 'InscritosController@edit');
    Route::post('/inscritos/update/{inscritoid}', 'InscritosController@update');
    Route::get('/inscritos/delete/{inscritoid}', 'InscritosController@delete');

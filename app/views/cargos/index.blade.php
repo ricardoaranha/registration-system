@@ -8,7 +8,24 @@
 </div>
 @endif
 
+<form class="form-inline" action="{{ URL::to('/cargos') }}" method="post">
+   <div class="form-group">
+      <label class="sr-only" for="query">Buscar cargo</label>
+      <div class="input-group">
+         <div class="input-group-addon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></div>
+         <input type="text" class="form-control" id="query" name="query" placeholder="Buscar cargo">
+      </div>
+   </div>
+   <button type="submit" class="btn btn-primary btn-md">Buscar</button>
+</form>
+
+<br /><br />
+
 <a href="{{ URL::to('/cargos/cadastrar') }}" class="btn btn-primary btn-md">Novo cargo</a>
+
+@if(isset($button))
+   {{ $button }}
+@endif
 
 <br /><br />
 

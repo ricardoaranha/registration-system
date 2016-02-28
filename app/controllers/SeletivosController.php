@@ -13,6 +13,20 @@ class SeletivosController extends BaseController {
 
 	}
 
+	public function search() {
+
+		$title = 'Seletivos';
+
+      $seletivos = Seletivos::where('seletivo', 'LIKE', '%'.Input::get('query').'%')
+			->paginate();
+
+		$button = '<a href="'.URL::to('/seletivos').'" class="btn btn-warning btn-md">Voltar</a>';
+
+		return View::make('seletivos.index', compact('title', 'seletivos', 'button'))
+			->with('seletivos', $seletivos);
+
+	}
+
    public function novoSeletivo() {
 
       $title = 'Cadastro de seletivos';

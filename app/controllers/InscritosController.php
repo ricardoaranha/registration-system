@@ -18,6 +18,25 @@ class InscritosController extends BaseController {
 
 	}
 
+	public function search() {
+
+		$title = 'Inscritos';
+
+      $inscritos = Inscritos::select('cargo', 'inscritos.id', 'seletivo', 'nome')
+         ->leftjoin('seletivos', 'seletivos.id', '=', 'inscritos.seletivoid')
+         ->leftJoin('cargos', 'cargos.id', '=', 'inscritos.cargoid')
+			->leftJoin('users', 'users.id', '=', 'inscritos.userid')
+			->where('nome', 'LIKE', '%'.Input::get('query').'%')
+			->orderBy('nome', 'asc')
+			->paginate();
+
+		$button = '<a href="'.URL::to('/inscritos').'" class="btn btn-warning btn-md">Voltar</a>';
+
+		return View::make('inscritos.index', compact('title', 'inscritos', 'button'))
+			->with('inscritos', $inscritos);
+
+	}
+
 	public function edit($inscritoid) {
 
 		$title = 'Editar inscrito';

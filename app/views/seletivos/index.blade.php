@@ -8,7 +8,24 @@
 </div>
 @endif
 
+<form class="form-inline" action="{{ URL::to('/seletivos') }}" method="post">
+   <div class="form-group">
+      <label class="sr-only" for="query">Buscar seletivo</label>
+      <div class="input-group">
+         <div class="input-group-addon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></div>
+         <input type="text" class="form-control" id="query" name="query" placeholder="Buscar seletivo">
+      </div>
+   </div>
+   <button type="submit" class="btn btn-primary btn-md">Buscar</button>
+</form>
+
+<br /><br />
+
 <a href="{{ URL::to('/seletivos/cadastrar') }}" class="btn btn-primary btn-md">Novo seletivo</a>
+
+@if(isset($button))
+   {{ $button }}
+@endif
 
 <br /><br />
 
