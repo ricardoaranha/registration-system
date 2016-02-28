@@ -48,9 +48,9 @@ if (Session::has('user')) {
    Route::post('/inscritos/update/{inscritoid}', 'InscritosController@update');
    Route::get('/inscritos/delete/{inscritoid}', 'InscritosController@delete');
 
-   Route::get('/relatorios/seletivos', 'ReslatoriosController@seletivos');
-   Route::get('/relatorios/cargos', 'ReslatoriosController@cargos');
-   Route::get('/relatorios/inscritos', 'ReslatoriosController@inscritos');
-   Route::post('/relatorios/download', 'ReslatoriosController@download');
+   Route::get('/relatorios/seletivos', 'RelatoriosController@seletivos');
+   Route::get('/relatorios/cargos', 'RelatoriosController@cargos');
+   Route::get('/relatorios/inscritos', 'RelatoriosController@inscritos');
+   Route::get('/relatorios/download/{title}', 'RelatoriosController@download');
 
 }
