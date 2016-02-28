@@ -11,6 +11,7 @@ class InscritosController extends BaseController {
          ->leftJoin('cargos', 'cargos.id', '=', 'inscritos.cargoid')
 			->leftJoin('users', 'users.id', '=', 'inscritos.userid')
          ->orderBy('nome', 'asc')
+			->where('usertypeid', 1)
          ->paginate(20);
 
 		return View::make('inscritos.index', compact('title', 'inscritos'))
@@ -27,6 +28,7 @@ class InscritosController extends BaseController {
          ->leftJoin('cargos', 'cargos.id', '=', 'inscritos.cargoid')
 			->leftJoin('users', 'users.id', '=', 'inscritos.userid')
 			->where('nome', 'LIKE', '%'.Input::get('query').'%')
+			->where('usertypeid', 1)
 			->orderBy('nome', 'asc')
 			->paginate();
 

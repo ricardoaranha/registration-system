@@ -20,9 +20,8 @@
          </ul>
       </div>
       @endif
-      <hr>
       <div class="col-md-8 col-md-offset-2">
-         <form class="form-horizontal" action="{{ URL::to('/login/cadastrar') }}" method="post">
+         <form class="form-horizontal" action="{{ $actionUrl }}" method="post">
             <fieldset>
                <div class="form-group">
                   <label for="nome">
@@ -37,25 +36,7 @@
                   <input type="text" class="form-control" id="email" name="email" @if(Session::has('request')) value="{{ Session::get('request')['email'] }}" @endif required>
                </div>
                <div class="form-group">
-                  <label for="cpf">
-                     CPF:
-                  </label>
-                  <input type="number" maxlength="11" class="form-control" id="cpf" name="cpf" @if(Session::has('request')) value="{{ Session::get('request')['cpf'] }}" @endif required>
-               </div>
-               <div class="form-group">
-                  <label for="rg">
-                     RG:
-                  </label>
-                  <input type="number" class="form-control" id="rg" name="rg" @if(Session::has('request')) value="{{ Session::get('request')['rg'] }}" @endif required>
-               </div>
-               <div class="form-group">
-                  <label for="dtanasc">
-                     Data de nascimento:
-                  </label>
-                  <input type="text" class="form-control" id="dtanasc" name="dtanasc" @if(Session::has('request')) value="{{ Session::get('request')['dtanasc'] }}" @endif required>
-               </div>
-               <div class="form-group">
-                  <label for="senha1">
+                  <label for="senha">
                      Senha:
                   </label>
                   <input type="password" class="form-control" id="senha" name="senha" required>
@@ -63,11 +44,11 @@
                </div>
                <div class="form-group">
                   <label for="senha2">
-                     Repetir Senha:
+                     Repetir senha:
                   </label>
                   <input type="password" class="form-control" id="senha2" name="senha2" required>
                </div>
-               <input type="submit" class="btn btn-success btn-md btn-block" value="Cadastrar">
+               <input type="submit" class="btn btn-success btn-md btn-block" value="{{ $buttonValue }}">
                <input type="reset" class="btn btn-danger btn-md btn-block" value="Limpar">
             </fieldset>
          </form>

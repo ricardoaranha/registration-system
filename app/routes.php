@@ -15,11 +15,16 @@ Route::get('/', 'HomeController@index');
 
 Route::get('/login', 'LoginController@index');
 Route::post('/login', 'LoginController@auth');
-Route::get('/login/cadastrar', 'LoginController@newUser');
-Route::post('/login/cadastrar', 'LoginController@create');
-Route::get('/logout', 'LoginController@logout');
 
 if (Session::has('user')) {
+
+   Route::get('/login/cadastrar', 'LoginController@newUser');
+   Route::get('/login/usuarios', 'LoginController@retrieve');
+   Route::post('/login/cadastrar', 'LoginController@create');
+   Route::get('/login/update/{userid}', 'LoginController@edit');
+   Route::post('/login/update/{userid}', 'LoginController@update');
+   Route::get('/login/delete/{userid}', 'LoginController@delete');
+   Route::get('/logout', 'LoginController@logout');
 
    Route::get('/seletivos', 'SeletivosController@retrieve');
    Route::post('/seletivos', 'SeletivosController@search');
@@ -42,5 +47,10 @@ if (Session::has('user')) {
    Route::get('/inscritos/update/{inscritoid}', 'InscritosController@edit');
    Route::post('/inscritos/update/{inscritoid}', 'InscritosController@update');
    Route::get('/inscritos/delete/{inscritoid}', 'InscritosController@delete');
+
+   Route::get('/relatorios/seletivos', 'ReslatoriosController@seletivos');
+   Route::get('/relatorios/cargos', 'ReslatoriosController@cargos');
+   Route::get('/relatorios/inscritos', 'ReslatoriosController@inscritos');
+   Route::post('/relatorios/download', 'ReslatoriosController@download');
 
 }

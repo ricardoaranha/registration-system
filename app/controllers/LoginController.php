@@ -23,6 +23,7 @@ class LoginController extends BaseController {
          $user = array(
             'id' => $user->id,
             'nome' => $user->nome,
+				'email' => $user->email,
 				'usertypeid' => $user->usertypeid
          );
 
@@ -41,11 +42,26 @@ class LoginController extends BaseController {
 
    }
 
+	public function retrieve() {
+
+		$title = 'Usuários cadastrados';
+
+		$users = User::where('usertypeid', 2)->paginate();
+
+		return View::make('login.list', compact('title', 'users'))
+			->with('users', $users);
+
+	}
+
    public function newUser() {
 
-      $title = 'Cadastrar';
+      $title = 'Cadastrar usuário';
 
-      return View::make('login.novoUsuario', compact('title'));
+		$buttonValue = 'Cadastrar';
+
+		$actionUrl = URL::to('/login/cadastrar');
+
+      return View::make('login.form', compact('title', 'buttonValue', 'actionUrl'));
 
    }
 
@@ -53,15 +69,12 @@ class LoginController extends BaseController {
 
       $request = Input::all();
 
-      $request['usertypeid'] = 1;
+      $request['usertypeid'] = 2;
 
       $rules = array(
          'nome' => 'required|alpha',
          'email' => 'required|email|unique:users,email',
-         'cpf' => 'required|numeric|digits:11|unique:users,cpf',
-         'rg' => 'required|numeric',
-         'dtanasc' => 'required|date_format:d/m/Y',
-         'senha' => 'required|alpha_num|between:8,12|same:'.$request['senha2']
+         'senha' => 'required|alpha_num|between:8,12|same:senha2'
       );
 
       $validation = Validator::make($request, $rules);
@@ -76,11 +89,69 @@ class LoginController extends BaseController {
 
       User::create($request);
 
-      return Redirect::action('LoginController@index')
+      return Redirect::action('LoginController@retrieve')
          ->with('class', 'success')
          ->with('msg', 'Cadastro realizado com sucesso!');
 
    }
+
+	public function edit($userid) {
+
+		$title = 'Alterar senha';
+
+		$actionUrl = URL::to('/login/update/'.$userid);
+
+		$buttonValue = 'Salvar';
+
+		return View::make('login.update', compact('title', 'users', 'actionUrl', 'buttonValue'));
+
+	}
+
+	public function update($userid) {
+
+		$request = Input::all();
+
+		$user = User::auth(Session::get('user')['email'], md5($request['senha']));
+
+		if(!$user) {
+			return Redirect::action('LoginController@update', array('id' => $userid))
+	         ->with('msg', 'Você não pode alterar pois senha atual incorreta ou o usuario que você está tentando alterar não é o seu, por favor tente novamente!');
+		}
+
+      $rules = array(
+         'senha' => 'required|alpha_num|between:8,12',
+			'senha1' => 'required|alpha_num|between:8,12|same:senha2|different:senha'
+      );
+
+      $validation = Validator::make($request, $rules);
+
+      if ($validation->fails()) {
+         return Redirect::action('LoginController@update', array('id' => $userid))
+            ->withErrors($validation);
+      }
+
+      $request['senha'] = md5($request['senha1']);
+
+		$user = User::find($userid);
+		$user->senha = $request['senha'];
+		$user->push();
+
+      return Redirect::action('LoginController@retrieve')
+         ->with('class', 'success')
+         ->with('msg', 'Senha alterada com sucesso!');
+
+	}
+
+	public function delete($userid) {
+
+		$user = User::find($userid);
+		$user->delete();
+
+		return Redirect::action('LoginController@retrieve')
+         ->with('class', 'success')
+         ->with('msg', 'Cadastro excluido com sucesso!');
+
+	}
 
    public function logout() {
 

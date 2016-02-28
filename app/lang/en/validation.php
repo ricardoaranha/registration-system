@@ -110,7 +110,12 @@ return array(
 			'required' => 'O campo SENHA é obrigatorio!',
 			'same' => 'Senhas diferentes, por favor certifique-se de digitar a mesnha senha corretamente',
 			'alpha_num' => 'A SENHA deve conter apenas letras e nímeros',
-			'between' => 'A SENHA deve ter entre 8 e 12 caracteres!'
+			'between' => 'A SENHA deve ter entre 8 e 12 caracteres!',
+			'exists' => 'A SENHA atual está incorreta, por favor certifique-se de digitar a senha atual corretamente'
+		),
+		'senha1' => array(
+			'different' => 'A NOVA SENHA deve ser diferente da SENHA ATUAL',
+			'same' => 'Senhas diferentes, por favor certifique-se de digitar a mesnha senha corretamente',
 		)
 	),
 
