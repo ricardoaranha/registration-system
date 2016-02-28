@@ -50,16 +50,17 @@
                   <input type="number" class="form-control" id="rg" name="rg" @if(Session::has('request')) value="{{ Session::get('request')['rg'] }}" @endif required>
                </div>
                <div class="form-group">
-                  <label for="dataNascimento">
+                  <label for="dtanasc">
                      Data de nascimento:
                   </label>
-                  <input type="text" class="form-control" id="dataNascimento" name="dataNascimento" @if(Session::has('request')) value="{{ Session::get('request')['dataNascimento'] }}" @endif required>
+                  <input type="text" class="form-control" id="dtanasc" name="dtanasc" @if(Session::has('request')) value="{{ Session::get('request')['dtanasc'] }}" @endif required>
                </div>
                <div class="form-group">
                   <label for="senha1">
                      Senha:
                   </label>
-                  <input type="password" class="form-control" id="senha1" name="senha1" required>
+                  <input type="password" class="form-control" id="senha" name="senha" required>
+                  <span id="senha1" class="help-block">* A senha deve conter entre 8 e 12 caraceres!
                </div>
                <div class="form-group">
                   <label for="senha2">

@@ -5,14 +5,14 @@
    <div class="col-md-6 col-md-offset-3">
       <h1>{{ $title }}</h1>
       @if(Session::has('msg'))
-      <div class="alert alert-danger alert-dismissible" role="alert">
+      <div class="alert alert-{{ Session::get('class') }} alert-dismissible" role="alert">
          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-         <strong>Erro!</strong> {{ Session::get('msg') }}
+         <strong>{{ Session::get('msg') }}</strong>
       </div>
       @endif
       <hr>
       <div class="col-md-8 col-md-offset-2">
-         <form action="{{ URL::to('/login/auth') }}" method="post">
+         <form action="{{ URL::to('/login') }}" method="post">
             <fieldset>
                <div class="form-group">
                   <label for="email">

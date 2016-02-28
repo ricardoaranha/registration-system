@@ -83,9 +83,34 @@ return array(
 	*/
 
 	'custom' => array(
-		'attribute-name' => array(
-			'rule-name' => 'custom-message',
+		'nome' => array(
+			'required' => 'O campo NOME é obrigatorio!',
+			'regex' => 'O campo NOME deve conter apenas letras!'
 		),
+		'email' => array(
+			'required' => 'O campo EMAIL é obrigatorio!',
+			'email' => 'O endereço de EMAIL digitado seve ser valido!<br />ex: nome@email.com',
+			'unique' => 'O EMAIL digitado já foi cadastrado!'
+		),
+		'cpf' => array(
+			'required' => 'O campo CPF é obrigatorio!',
+			'numeric' => 'O CPF deve conter apenas números!',
+			'digits' => 'O CPF deve conter apenas 11 digitos!',
+			'unique' => 'O CPF digitado já foi cadstrado!'
+		),
+		'rg' => array(
+			'required' => 'O campo RG é obrigatorio!',
+			'numeric' => 'O RG deve conter apenas números!'
+		),
+		'dtanasc' => array(
+			'required' => 'O campo DATA DE NASCIMENTO é obrigatorio!',
+			'date_format' => 'O fromato da DATA DE NASCIMENTO deve ser dia/mês/ano'
+		),
+		'senha' => array(
+			'required' => 'O campo SENHA é obrigatorio!',
+			'alpha_num' => 'A SENHA deve conter apenas letras e nímeros',
+			'between' => 'A SENHA deve ter entre 8 e 12 caracteres!'
+		)
 	),
 
 	/*

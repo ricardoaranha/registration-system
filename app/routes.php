@@ -14,6 +14,7 @@
 Route::get('/', 'HomeController@index');
 
 Route::get('/login', 'LoginController@index');
-Route::post('/login/auth', 'LoginController@auth');
+Route::post('/login', 'LoginController@auth');
 Route::get('/login/cadastrar', 'LoginController@newUser');
 Route::post('/login/cadastrar', 'LoginController@create');
+Route::get('/logout', 'LoginController@logout');

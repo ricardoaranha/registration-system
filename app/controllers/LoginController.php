@@ -16,16 +16,26 @@ class LoginController extends BaseController {
 
       $request['senha'] = md5($request['senha']);
 
-      $user = DB::table('users')
-         ->where('email', '=', $request['email'])
-         ->where('senha', '=', $request['senha'])
-         ->get();
+      $user = User::auth($request['email'],$request['senha']);
 
       if ($user) {
-         return Redirect::action('HomeController@index');
+
+         $user = array(
+            'id' => $user->userid,
+            'nome' => $user->nome
+         );
+
+         Session::put('user', $user);
+
+         return Redirect::action('HomeController@index')
+            ->with('msg', 'Login realizado com sucesso!');
+
       } else {
+
          return Redirect::action('LoginController@index')
+            ->wiht('class', 'danger')
             ->with('msg', 'Email e ou senha invalidos, por favor tente novamente!');
+
       }
 
    }
@@ -42,18 +52,20 @@ class LoginController extends BaseController {
 
       $request = Input::all();
 
-      if($request['senha1'] != $request['senha2']) {
+      $request['usertypeid'] = 1;
+
+      if ($request['senha'] != $request['senha2']) {
          return Redirect::action('LoginController@newUser')
             ->with('msg', 'Senhas diferente, por favor certifique-se de digitar a mesnha senha corretamente');
       }
 
       $rules = array(
-         'nome' => array('required'),
-         'email' => array('required', 'email'),
-         'cpf' => array('required', 'numeric', 'min:11', 'max:11'),
-         'rg' => array('required', 'numeric'),
-         'dataNascimento' => array('required', 'date_format:d/m/Y'),
-         'senha' => array('required', 'alpha_num')
+         'nome' => 'required|regex:/^[a-z A-Z]+$/',
+         'email' => 'required|email|unique:users,email',
+         'cpf' => 'required|numeric|digits:11|unique:users,cpf',
+         'rg' => 'required|numeric',
+         'dtanasc' => 'required|date_format:d/m/Y',
+         'senha' => 'required|alpha_num|between:8,12'
       );
 
       $validation = Validator::make($request, $rules);
@@ -63,6 +75,23 @@ class LoginController extends BaseController {
             ->withErrors($validation)
             ->with('request', $request);
       }
+
+      $request['senha'] = md5($request['senha']);
+
+      // User::create($request);
+
+      return Redirect::action('LoginController@index')
+         ->with('class', 'success')
+         ->with('msg', 'Cadastro realizado com sucesso!');
+
+   }
+
+   public function logout() {
+
+      Session::flush();
+
+      return Redirect::action('HomeController@index')
+         ->with('msg', 'Lougt realizado com sucesso!');
 
    }
 
