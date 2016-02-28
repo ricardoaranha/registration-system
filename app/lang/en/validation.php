@@ -85,7 +85,7 @@ return array(
 	'custom' => array(
 		'nome' => array(
 			'required' => 'O campo NOME é obrigatorio!',
-			'regex' => 'O campo NOME deve conter apenas letras!'
+			'alpha' => 'O campo NOME deve conter apenas letras!'
 		),
 		'email' => array(
 			'required' => 'O campo EMAIL é obrigatorio!',
@@ -108,6 +108,7 @@ return array(
 		),
 		'senha' => array(
 			'required' => 'O campo SENHA é obrigatorio!',
+			'same' => 'Senhas diferentes, por favor certifique-se de digitar a mesnha senha corretamente',
 			'alpha_num' => 'A SENHA deve conter apenas letras e nímeros',
 			'between' => 'A SENHA deve ter entre 8 e 12 caracteres!'
 		)

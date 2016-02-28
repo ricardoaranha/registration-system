@@ -54,18 +54,13 @@ class LoginController extends BaseController {
 
       $request['usertypeid'] = 1;
 
-      if ($request['senha'] != $request['senha2']) {
-         return Redirect::action('LoginController@newUser')
-            ->with('msg', 'Senhas diferente, por favor certifique-se de digitar a mesnha senha corretamente');
-      }
-
       $rules = array(
-         'nome' => 'required|regex:/^[a-z A-Z]+$/',
+         'nome' => 'required|alpha',
          'email' => 'required|email|unique:users,email',
          'cpf' => 'required|numeric|digits:11|unique:users,cpf',
          'rg' => 'required|numeric',
          'dtanasc' => 'required|date_format:d/m/Y',
-         'senha' => 'required|alpha_num|between:8,12'
+         'senha' => 'required|alpha_num|between:8,12|same:'.$request['senha2']
       );
 
       $validation = Validator::make($request, $rules);
@@ -78,7 +73,7 @@ class LoginController extends BaseController {
 
       $request['senha'] = md5($request['senha']);
 
-      // User::create($request);
+      User::create($request);
 
       return Redirect::action('LoginController@index')
          ->with('class', 'success')
