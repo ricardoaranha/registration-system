@@ -158,7 +158,7 @@ class LoginController extends BaseController {
       Session::flush();
 
       return Redirect::action('HomeController@index')
-         ->with('msg', 'Lougt realizado com sucesso!');
+         ->with('msg', 'Logout realizado com sucesso!');
 
    }
 
